@@ -12,7 +12,7 @@ export default class TodoForm extends Component {
             newToDo: e.target.value
         });
     };
-    handleSubmit = () => {
+    handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTodo(this.state.newToDo);
         this.setState({ newToDo: "" })
@@ -20,9 +20,9 @@ export default class TodoForm extends Component {
     render() {
 
         return (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
                 <label htmlFor="input"></label>
-                <input type="text" name="input" id="input" value={this.state.newToDo} onChage={handleChange} />
+                <input type="text" name="input" id="input" value={this.state.newToDo} onChage={this.handleChange} />
                 <button>Add</button>
             </form>
         )
