@@ -26,6 +26,7 @@ class App extends React.Component {
   };
 
   addTodo = (newTask) => {
+    alert("hey hey")
     const newTodo = {
       task: newTask,
       id: Date.now(),
@@ -36,9 +37,19 @@ class App extends React.Component {
     });
   };
 
-  toggleCompleted = () => {
-
-  }
+  toggleCompleted = (targetId) => {
+    this.setState({
+      todo: this.state.todo.map((todo) => {
+        if (todo.id === targetId) {
+          return {
+            ...todo, completed: !todo.completed
+          };
+        } else {
+          return todo
+        };
+      })
+    });
+  };
   filter = () => {
 
   }
@@ -47,7 +58,7 @@ class App extends React.Component {
     return (
       <div>
         <TodoForm addTodo={this.addTodo} />
-        <TodoList todo={this.state.todo} />
+        <TodoList todo={this.state.todo} toggleCompleted={this.toggleCompleted} />
       </div>
     );
   }

@@ -12,30 +12,36 @@ export default class TodoList extends Component {
     // }
     constructor() {
         super();
-        this.state = {
-            allToDos: []
-        }
-    }
-    componentDidMount() {
-        this.setState({
-            allToDos: [...this.props.todo]
-        })
+        // this.state = {
+        //     allToDos: []
+        // };
+    };
+    // componentDidMount() {                DOES NOT WORK because this only runs once
+    //     this.setState({                  componentWillUpdate would watch for changes and re-render
+    //         allToDos: [...this.props.todo]
+    //     });
+    // };
+    eventToggle = (e) => {
+        this.props.toggleCompleted(e.target.id)
     }
     render() {
         return (
             <div>
-                {this.state.allToDos.map((object) => {
+                {this.props.todo.map((object) => {
+                    // {this.state.allToDos.map((object) => {
                     return (
                         <div className="todo-card">
                             <Todo
                                 key={object.id}
                                 completed={object.completed}
                                 task={object.task}
-                            ></Todo>
+                                id={object.id}
+                                toggleCompleted={this.props.toggleCompleted}
+                            />
                         </div>
                     )
                 })}
             </div>
         )
-    }
-}
+    };
+};
